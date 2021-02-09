@@ -4,7 +4,6 @@
     {
         private Box _head;
         private Box _tail;
-        private Box _current;
         private int _count;
 
         public Queue()
@@ -22,34 +21,33 @@
             }
         }
 
-        public int Current
+        public object Current
         {
             get
             {
-                return _current.Value;
+                return _head.Value;
             }
         }
 
         public bool MoveNext()
         {
-            if (_current == null)
+            if (_head == null)
             {
                 return false;
             }
 
-            _current = _current.Next;
+            _head = _head.Next;
 
-            return _current != null;
+            return _head != null;
         }
 
-        public void Enqueue(int value)
+        public void Enqueue(object value)
         {
             Box box = new Box(value);
 
             if (_head == null && _tail == null)
             {
                 _head = box;
-                _current = box;
                 _tail = box;
             }
             else
@@ -61,15 +59,19 @@
             _count++;
         }
 
-        public int Dequeue()
+        public object Dequeue()
         {
             // сделать так, чтобы хвост не оставался.
             if (_head == null)
                 return 0;
 
-            int value = _head.Value;
+            if (_tail == _head)
+            {
+                _tail = null;
+            }
+
+            object value = _head.Value;
             _head = _head.Next;
-            _current = _head;
             _count--;
 
             return value;

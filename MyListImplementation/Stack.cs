@@ -4,7 +4,6 @@
     {
         private Box _head;
         private Box _tail;
-        private Box _current;
         private int _count;
 
         public Stack()
@@ -22,34 +21,21 @@
             }
         }
 
-        public int Current
+        public object Current
         {
             get
             {
-                return _current.Value;
+                return _tail.Value;
             }
         }
 
-        public bool MoveNext()
-        {
-            if (_current == null)
-            {
-                return false;
-            }
-
-            _current = _current.Next;
-
-            return _current != null;
-        }
-
-        public void Push(int value)
+        public void Push(object value)
         {
             Box box = new Box(value);
 
             if (_head == null && _tail == null)
             {
                 _head = box;
-                _current = box;
                 _tail = box;
             }
             else
@@ -62,15 +48,24 @@
             _count++;
         }
 
-        public int Pull()
+        public object Pull()
         {
             // Удалять голову, если хвост указывает на голову (голова == хвост).
             if (_tail == null)
                 return 0;
 
-            int value = _tail.Value;
-            _tail = _tail.Next;
+            object value = _tail.Value;
             _count--;
+            if (_head == _tail)
+            {
+                _tail = null;
+                _head = null;
+            }
+            else
+            {
+                _tail = _tail.Next;
+            }
+           
 
             return value;
         }

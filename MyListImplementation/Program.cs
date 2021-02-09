@@ -9,9 +9,10 @@ namespace MyListImplementation
             // string, double, int
             List list = new List();
 
-            list.Add(1);
+            list.Add("1 text");
             list.Add(2);
-            list.Add(3);
+            list.Add(3.3);
+
 
             Console.WriteLine("List: ");
             do
@@ -20,12 +21,17 @@ namespace MyListImplementation
                 Console.Write(" ");
             } while (list.MoveNext());
 
+            list.Remove();
+            list.Remove();
+            list.Remove();
+            list.Remove();
+
             Console.WriteLine();
             Console.WriteLine("Queue: ");
 
             Queue queue = new Queue();
-            queue.Enqueue(1);
-            queue.Enqueue(2);
+            queue.Enqueue(1.111);
+            queue.Enqueue("2 text");
             queue.Enqueue(3);
 
             while (queue.Count > 0)
@@ -45,9 +51,9 @@ namespace MyListImplementation
 
             Stack stack = new Stack();
 
-            stack.Push(1);
+            stack.Push("1 text");
             stack.Push(2);
-            stack.Push(3);
+            stack.Push(3.3);
 
             while (stack.Count > 0)
             {
